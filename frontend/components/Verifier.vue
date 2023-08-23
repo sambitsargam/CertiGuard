@@ -6,7 +6,7 @@
       </QrcodeStream>
     </div>
     <div v-else>
-      <CButton color="primary" @click="scan">Scan Ticket</CButton>
+      <CButton color="primary" @click="scan">Scan QR Code on Certificate</CButton>
     </div>
     <div v-if="verifyStatus !== ''"  style="width: 300px">
       <Vue3Lottie
@@ -21,7 +21,7 @@
 import { QrcodeStream } from 'vue-qrcode-reader'
 import { CButton, CSpinner } from '@coreui/vue';
 
-import YESAnimation from '../assets/yes.json'
+import YESAnimation from '../assets/yes.svg'
 import NOAnimation from '../assets/no.json'
 
 

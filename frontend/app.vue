@@ -20,6 +20,11 @@
     height: 170px;
     margin-bottom: auto;
   }
+  @media (max-width: 768px) {
+    .logo {
+      height: 100px; /* Adjust the size as needed for mobile */
+    }
+  }
 .container {
   min-width: 800px; /* Set your desired maximum width */
   margin: 0 auto; /* Center the component horizontally */

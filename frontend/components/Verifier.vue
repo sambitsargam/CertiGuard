@@ -21,7 +21,7 @@
 import { QrcodeStream } from 'vue-qrcode-reader'
 import { CButton, CSpinner } from '@coreui/vue';
 
-import YESAnimation from '../assets/yes.svg'
+import YESAnimation from '../assets/yes.json'
 import NOAnimation from '../assets/no.json'
 
 

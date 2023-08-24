@@ -50,6 +50,7 @@ export default {
           console.log(data);
           this.allowScan = false;
           let value = data[0].rawValue;
+          console.log(value);
           const result = await this.$axios.get(`${this.webService}/validate?response=${value}`, { validateStatus: () => true });
           // if (result.status !== 200) {
           //   console.log(`Failed to verify from service: ${result.status} ${result.statusText}`);

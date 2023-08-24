@@ -13,7 +13,7 @@
         :animationData="verifyStatus === 'YES' ? yesAnimation : noAnimation"
         :loop="false"
       />
-      <h1>{{ name }}</h1>
+      <h1>{{ fetchedName }}</h1>
     </div>
   </div>
 </template>
@@ -51,30 +51,64 @@ export default {
           console.log(data);
           this.allowScan = false;
           let value = data[0].rawValue;
-          console.log(value);
           const result = await this.$axios.get(`${this.webService}/validate?response=${value}`, { validateStatus: () => true });
-          // fetch the data from the firebase json file
-           const response = await axios.get('https://certi-1d8a0-default-rtdb.firebaseio.com/tickets.json');
-          const fetchedData = response.data;
-     
-          // Extract the recipient name based on a specific ticket value
-          const matchingTicket = Object.values(fetchedData.tickets).find(ticket => ticket.ticket === value);
+          const response = await axios.get('https://certi-1d8a0-default-rtdb.firebaseio.com/tickets.json');
+          const jsonData = response.data;
 
-           // Extract the recipient name based on a specific ticket value
-           if (matchingTicket) {
-            this.fetchedName = matchingTicket.recipient;
-          } else {
-            this.fetchedName = "Ticket not found";
+          let recipientName = null;
+
+          for (const key in jsonData) {
+            if (jsonData.hasOwnProperty(key)) {
+              const ticketId = jsonData[key].ticket;
+              if (ticketId === value) {
+                recipientName = jsonData[key].recipient;
+                break; // Exit loop since we found the target ticket
+              }
+            }
           }
-
-          const name = this.fetchedName;
+          if (recipientName) {
+             this.name = recipientName;
+          } else {
+            this.name = "Ticket not found";
+          }
+          const fetchedName = this.name;
           this.verifyStatus = result.data.toLowerCase() === "valid challenge" ? "YES" : "NO";
         }
       } catch (err) {
         alert(err);
       }
 
-    }
+    },
+
+    // // creating a function to test the data
+    // async fetchname() {
+    //   try {
+    //     const response = await axios.get('https://certi-1d8a0-default-rtdb.firebaseio.com/tickets.json');
+    //     const jsonData = response.data;
+
+    //     const targetTicketId = "0x17885244b9d68d66b76df6b6d00ec83b5209ca0f9e4310b484f10029032b650e44aff0b8badbdba8321c84ea9ca50f704182f723";
+    //     let recipientName = null;
+
+    //     for (const key in jsonData) {
+    //       if (jsonData.hasOwnProperty(key)) {
+    //         const ticketId = jsonData[key].ticket;
+    //         if (ticketId === targetTicketId) {
+    //           recipientName = jsonData[key].recipient;
+    //           break; // Exit loop since we found the target ticket
+    //         }
+    //       }
+    //     }
+
+    //     if (recipientName) {
+    //       console.log(`Recipient for ticket ${targetTicketId}: ${recipientName}`);
+    //     } else {
+    //       console.log(`Ticket ${targetTicketId} not found.`);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //   }
+    // }
+
   }
   
 }

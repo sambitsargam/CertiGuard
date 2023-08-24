@@ -47,6 +47,7 @@ export default {
     async onDecode(data) {
       try {
         if (data !== "") {
+          console.log(data);
           this.allowScan = false;
           let value = data[0].rawValue;
           const result = await this.$axios.get(`${this.webService}/validate?response=${value}`, { validateStatus: () => true });

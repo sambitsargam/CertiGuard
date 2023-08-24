@@ -58,8 +58,7 @@ export default {
           const fetchedData = response.data;
      
           // Extract the recipient name based on a specific ticket value
-          const desiredTicketValue = "fhghghgjjhjkjhjkjh"; // Replace with the desired ticket value
-          const matchingTicket = Object.values(fetchedData.tickets).find(ticket => ticket.ticket === desiredTicketValue);
+          const matchingTicket = Object.values(fetchedData.tickets).find(ticket => ticket.ticket === value);
 
            // Extract the recipient name based on a specific ticket value
            if (matchingTicket) {

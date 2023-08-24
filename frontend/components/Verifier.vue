@@ -14,9 +14,6 @@
         :loop="false"
       />
     </div>
-    <div v-if="verifyStatus === 'YES'" class="recipient-id">
-        Recipient Name: {{ recipientName }}
-      </div>
   </div>
 </template>
 
@@ -67,12 +64,13 @@ export default {
               const ticketId = jsonData[key].ticket;
               if (ticketId === value) {
                 recipientName = jsonData[key].recipient;
+                details = jsonData[key].details;
                 break; // Exit loop since we found the target ticket
               }
             }
           }
           if (recipientName) {
-             alert(`Recipient for Certificate: ${recipientName}`);
+             alert(`Recipient for Certificate: ${recipientName} \n Got for: ${details}`);
           } else {
             alert(`Certificate not found.`);
           }

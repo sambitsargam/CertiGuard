@@ -77,19 +77,20 @@ export default {
       this.$emit('gotKey', this.ticketData);
     },
     async downloadAsPNG() {
-      const qrContainer = this.$refs.qrContainer;
+      alert("Your Browser Does Not Support This Feature... Please Take A Screenshot Of The Certificate")
+      // const qrContainer = this.$refs.qrContainer;
 
-      try {
-        const canvas = await html2canvas(qrContainer);
-        const pngDataUrl = canvas.toDataURL('image/png');
+      // try {
+      //   const canvas = await html2canvas(qrContainer);
+      //   const pngDataUrl = canvas.toDataURL('image/png');
 
-        const a = document.createElement('a');
-        a.href = pngDataUrl;
-        a.download = 'certificate.png';
-        a.click();
-      } catch (error) {
-        console.error('Error generating PNG:', error);
-      }
+      //   const a = document.createElement('a');
+      //   a.href = pngDataUrl;
+      //   a.download = 'certificate.png';
+      //   a.click();
+      // } catch (error) {
+      //   console.error('Error generating PNG:', error);
+      // }
     },
     async purchaseTicket() {
       try {

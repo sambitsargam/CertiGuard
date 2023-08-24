@@ -13,8 +13,10 @@
         :animationData="verifyStatus === 'YES' ? yesAnimation : noAnimation"
         :loop="false"
       />
-      <h1>{{ fetchedName }}</h1>
     </div>
+    <div v-if="recipientName && verifyStatus === 'YES'" class="recipient-id">
+        Recipient Name: {{ recipientName }}
+      </div>
   </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
     return {
       allowScan: false,
       verifyStatus: "",
+      recipientName: "",
       yesAnimation: YESAnimation,
       noAnimation: NOAnimation
     }
@@ -131,6 +134,13 @@ export default {
     flex-direction: column;
     align-items: center;
   }
+
+  .recipient-id {
+  text-align: center;
+  font-size: 24px; /* You can adjust this value to your preferred text size */
+  font-weight: bold; /* Add additional styling if needed */
+  margin-top: 20px; /* Add margin for spacing */
+}
 
   .title {
     font-size: 20px;

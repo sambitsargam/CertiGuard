@@ -14,7 +14,7 @@
         :loop="false"
       />
     </div>
-    <div v-if="recipientName && verifyStatus === 'YES'" class="recipient-id">
+    <div v-if="verifyStatus === 'YES'" class="recipient-id">
         Recipient Name: {{ recipientName }}
       </div>
   </div>
@@ -70,9 +70,9 @@ export default {
             }
           }
           if (recipientName) {
-             this.name = recipientName;
+             alert(`Recipient for Certificate: ${recipientName}`);
           } else {
-            this.name = "Ticket not found";
+            this.name = "Certificate not found";
           }
           const fetchedName = this.name;
           this.verifyStatus = result.data.toLowerCase() === "valid challenge" ? "YES" : "NO";
@@ -137,9 +137,9 @@ export default {
 
   .recipient-id {
   text-align: center;
-  font-size: 24px; /* You can adjust this value to your preferred text size */
+  font-size: 0.5cm; /* You can adjust this value to your preferred text size */
   font-weight: bold; /* Add additional styling if needed */
-  margin-top: 20px; /* Add margin for spacing */
+  margin-top: 30%; /* Add margin for spacing */
 }
 
   .title {

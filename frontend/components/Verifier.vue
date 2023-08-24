@@ -13,6 +13,7 @@
         :animationData="verifyStatus === 'YES' ? yesAnimation : noAnimation"
         :loop="false"
       />
+      <h1>{{ name }}</h1>
     </div>
   </div>
 </template>
@@ -53,8 +54,21 @@ export default {
           console.log(value);
           const result = await this.$axios.get(`${this.webService}/validate?response=${value}`, { validateStatus: () => true });
           // fetch the data from the firebase json file
-          
+           const response = await axios.get('https://certi-1d8a0-default-rtdb.firebaseio.com/tickets.json');
+          const fetchedData = response.data;
+     
+          // Extract the recipient name based on a specific ticket value
+          const desiredTicketValue = "fhghghgjjhjkjhjkjh"; // Replace with the desired ticket value
+          const matchingTicket = Object.values(fetchedData.tickets).find(ticket => ticket.ticket === desiredTicketValue);
 
+           // Extract the recipient name based on a specific ticket value
+           if (matchingTicket) {
+            this.fetchedName = matchingTicket.recipient;
+          } else {
+            this.fetchedName = "Ticket not found";
+          }
+
+          const name = this.fetchedName;
           this.verifyStatus = result.data.toLowerCase() === "valid challenge" ? "YES" : "NO";
         }
       } catch (err) {

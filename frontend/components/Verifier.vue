@@ -58,6 +58,7 @@ export default {
           const jsonData = response.data;
 
           let recipientName = null;
+          let details = null;
 
           for (const key in jsonData) {
             if (jsonData.hasOwnProperty(key)) {

@@ -103,20 +103,6 @@ export default {
         this.ticketData = encodedData.data;
         window.localStorage.setItem('MyTicket', this.ticketData);
         this.$emit('gotKey', this.ticketData);
-        const savedShortAddress = window.localStorage.getItem('ShortAddress');
-        const certificateRecipient = window.localStorage.getItem('certificateRecipient');
-        const certificateDetails = window.localStorage.getItem('certificateDetails');
-        const apiEndpoint = 'https://certi-1d8a0-default-rtdb.firebaseio.com/tickets.json';
-        const postData = {
-          ticket: this.ticketData,
-          address: savedShortAddress,
-          recipient: certificateRecipient,
-          details: certificateDetails
-        };
-        const response = await this.$axios.post(apiEndpoint, postData);
-        if (response.status === 200) {
-          this.purchasing = false;
-        }
       } catch (err) {
         console.log(err);
       }

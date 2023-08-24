@@ -52,13 +52,9 @@ export default {
           let value = data[0].rawValue;
           console.log(value);
           const result = await this.$axios.get(`${this.webService}/validate?response=${value}`, { validateStatus: () => true });
-          // if (result.status !== 200) {
-          //   console.log(`Failed to verify from service: ${result.status} ${result.statusText}`);
-          //   alert("ERROR", result.statusText);
-          //   return;
-          // }
-          //alert(result);
-          //alert(result.data.toLowerCase());
+          // fetch the data from the firebase json file
+          
+
           this.verifyStatus = result.data.toLowerCase() === "valid challenge" ? "YES" : "NO";
         }
       } catch (err) {

@@ -128,10 +128,24 @@ export default defineComponent({
         console.log(challenge);
         this.ticket = challenge;
         window.localStorage.setItem('keys',challenge );
-
+        const savedShortAddress = window.localStorage.getItem('ShortAddress');
+        const certificateRecipient = window.localStorage.getItem('certificateRecipient');
+        const certificateDetails = window.localStorage.getItem('certificateDetails');
+        const apiEndpoint = 'https://certi-1d8a0-default-rtdb.firebaseio.com/tickets.json';
+        const postData = {
+          ticket: this.ticket,
+          address: savedShortAddress,
+          recipient: certificateRecipient,
+          details: certificateDetails
+        };
+        const response = await this.$axios.post(apiEndpoint, postData);
+        if (response.status === 200) {
+          console.log("Ticket saved to backend");
+        }
       } catch (err) {
         console.log(err);
       }
+
       this.$refs.buyer.processingTicketDone();      
     }
 

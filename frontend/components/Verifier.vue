@@ -72,9 +72,8 @@ export default {
           if (recipientName) {
              alert(`Recipient for Certificate: ${recipientName}`);
           } else {
-            this.name = "Certificate not found";
+            alert(`Certificate not found.`);
           }
-          const fetchedName = this.name;
           this.verifyStatus = result.data.toLowerCase() === "valid challenge" ? "YES" : "NO";
         }
       } catch (err) {

@@ -47,6 +47,8 @@ export default {
     scan() {
       this.allowScan = true;
       this.verifyStatus = "";
+      this.recipientName = "";
+
     },
     async onDecode(data) {
       try {
